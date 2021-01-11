@@ -1,26 +1,19 @@
-$(function() {
-    $("form" ).submit(function( event ) {
-
+$(document).ready(function(){
+    $("form").submit(function(event){
         event.preventDefault();
+        let a = $("#weight").val()
+        let b = $("#height").val()
+
+        let bmi = (a/(b*b)*10000).toFixed(2)
         
-        let height = $('#height').val()
-        let weight = $('#weight').val()
+        $("#results").text(bmi)
 
-        let imc = (weight / (height * height) * 10000).toFixed(2)
+        let color
 
-      $('#results').text(imc)
+        if(bmi < 18.6 || bmi >= 24.9) color = "red" 
+        else if(bmi >= 18.6 && bmi <24.9) color = "green"
         
-      if (imc<18.6) {
-        $('p:nth-of-type(1)').css('color', 'red')
-      }
-
-      else if (imc>=18.6 && imc<=24.9) {
-        $('p:nth-of-type(2)').css('color', 'green')
-      }
-
-      else {
-        $('p:nth-of-type(3)').css('color', 'red')
-      }
-      
-    });
-}) 
+        console.log(color)
+        $("#results").css("color", color)
+    })
+})
